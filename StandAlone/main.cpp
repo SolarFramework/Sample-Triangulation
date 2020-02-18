@@ -83,31 +83,19 @@ int main(int argc, char **argv){
   ///////////////////////////////////
   ///////////////////////////////////
 
-#ifdef USE_FREE
+
     LOG_INFO("free keypoint detector");
     auto keypointsDetector =xpcfComponentManager->resolve<features::IKeypointDetector>();
-#else
-    LOG_INFO("nonfree keypoint detector");
-    auto  keypointsDetector = xpcfComponentManager->resolve<features::IKeypointDetector>();
-#endif
-
-#ifdef USE_FREE
     LOG_INFO("free keypoint extractor");
     auto descriptorExtractor =xpcfComponentManager->resolve<features::IDescriptorsExtractor>();
-#else
-    LOG_INFO("nonfree keypoint extractor");
-    auto descriptorExtractor = xpcfComponentManager->resolve<features::IDescriptorsExtractor>();
-#endif
-
     auto matcher =xpcfComponentManager->resolve<features::IDescriptorMatcher>();
     auto overlayMatches =xpcfComponentManager->resolve<display::IMatchesOverlay>();
     auto viewerMatches =xpcfComponentManager->resolve<display::IImageViewer>();
     auto poseFinderFrom2D2D =xpcfComponentManager->resolve<solver::pose::I3DTransformFinderFrom2D2D>();
     auto triangulator =xpcfComponentManager->resolve<solver::map::ITriangulator>();
     auto mapFilter =xpcfComponentManager->resolve<solver::map::IMapFilter>();
-#ifdef SOLAR_USE_OPENGL
-   auto viewer3DPoints =xpcfComponentManager->resolve<display::I3DPointsViewer>();
-#endif
+    auto viewer3DPoints =xpcfComponentManager->resolve<display::I3DPointsViewer>();
+
 
     // declarations of data structures used to exange information between components
     SRef<Image>                                  image1;
@@ -170,9 +158,7 @@ int main(int argc, char **argv){
     // Display the matches and the 3D point cloud
     while (true){
         if (
-#ifdef SOLAR_USE_OPENGL
             viewer3DPoints->display(filteredCloud, poseFrame2) == FrameworkReturnCode::_STOP ||
-#endif
             viewerMatches->display(matchesImage) == FrameworkReturnCode::_STOP  )
         {
            LOG_INFO("End of Triangulation sample");
