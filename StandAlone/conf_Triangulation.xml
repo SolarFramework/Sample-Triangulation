@@ -47,7 +47,7 @@
 	<module uuid="28b89d39-41bd-451d-b19e-d25a3d7c5797" name="SolARModuleTools"  path="$REMAKEN_RULES_ROOT/../packages/SolARBuild/win-cl-14.1/SolARModuleTools/0.7.0/lib/x86_64/shared" description="Module Tools">
 		<component uuid="09205b96-7cba-4415-bc61-64744bc26222" description="SolARMapFilterOpencv" name="SolARMapFilterOpencv">
                 <interface uuid="125f2007-1bf9-421d-9367-fbdc1210d006" description="IComponentIntrospect" name="IComponentIntrospect"/>
-                <interface uuid="e0d6cc82-6af2-493d-901a-2384fca0b16f" description="IMapFilter" name="IMapFilter"/>
+                <interface uuid="68dc9152-5199-11ea-8d77-2e728ce88125" description="IMapFilter" name="IMapFilter"/>
         </component>
 	</module>	
 	<configuration>

@@ -21,16 +21,9 @@
 
 #include <boost/log/core.hpp>
 
-// ADD COMPONENTS HEADERS HERE
-
 #include "SolARModuleOpencv_traits.h"
 
-#include "SolARModuleTools_traits.h"
-
-#ifndef USE_FREE
-#include "SolARModuleNonFreeOpencv_traits.h"
-#endif
-
+// ADD COMPONENTS HEADERS HERE
 #include "xpcf/xpcf.h"
 #include "core/Log.h"
 #include "api/image/IImageLoader.h"
@@ -51,15 +44,6 @@ using namespace SolAR;
 using namespace SolAR::datastructure;
 using namespace SolAR::api;
 using namespace SolAR::MODULES::OPENCV;
-using namespace SolAR::MODULES::TOOLS;
-#ifndef USE_FREE
-using namespace SolAR::MODULES::NONFREEOPENCV;
-#endif
-
-#ifdef SOLAR_USE_OPENGL
-#include "SolARModuleOpengl_traits.h"
-using namespace SolAR::MODULES::OPENGL;
-#endif
 
 namespace xpcf = org::bcom::xpcf;
 
@@ -74,19 +58,13 @@ int main(int argc, char **argv){
     /* instantiate component manager*/
     /* this is needed in dynamic mode */
     SRef<xpcf::IComponentManager> xpcfComponentManager = xpcf::getComponentManagerInstance();
-#ifdef USE_FREE
+
     if(xpcfComponentManager->load("conf_Triangulation.xml")!=org::bcom::xpcf::_SUCCESS)
     {
         LOG_ERROR("Failed to load the configuration file conf_Triangulation.xml")
         return -1;
     }
-#else
-    if(xpcfComponentManager->load("conf_Triangulation_nf.xml")!=org::bcom::xpcf::_SUCCESS)
-    {
-        LOG_ERROR("Failed to load the configuration file conf_Triangulation_nf.xml")
-        return -1;
-    }
-#endif
+
     // declare and create components
     LOG_INFO("Start creating components");
 
