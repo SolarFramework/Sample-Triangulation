@@ -32,36 +32,29 @@ pipeline {
                 expression { params.RELEASE == true }
              }               
              steps {
-                getThirdParties('1.0.0')
+                dir("StandAlone") {
+                    getThirdParties('1.0.0')
+                }
              }
         }
 
-        stage("Get Third Parties") {
-            when {
-                expression { params.RELEASE == false }
-            }                   
-            steps {
-                installDependency('freeglut','3.0.0')
-            }
-        }          
-
-        stage("Build") {
+        stage("Build StandAlone") {
              steps {
                  withEnv(['REMAKEN_RULES_ROOT=/home/jenkins/.remaken/rules/']) {
-                     sh "qmake SolARTriangulationSample.pro"
+                     sh "qmake StandAlone/StandAloneSolARTriangulationSample.pro"
                      sh "make"
                      sh "make install"
                  }
              }
         }
 
-        stage("Build Debug") {
+        stage("Build Debug StandAlone") {
             when {
                 expression { params.RELEASE == true }
             }            
              steps {
                  withEnv(['REMAKEN_RULES_ROOT=/home/jenkins/.remaken/rules/']) {
-                     sh "qmake SolARTriangulationSample.pro CONFIG+=debug"
+                     sh "qmake StandAlone/SolARTriangulationSample.pro CONFIG+=debug"
                      sh "make"
                      sh "make install"
                  }
@@ -75,7 +68,7 @@ pipeline {
             steps {
                 script {
                     version = sh (
-                        script: "cat *.pro  | grep VERSION | head -1 | cut -d '=' -f 2",
+                        script: "cat StandAlone/*.pro  | grep VERSION | head -1 | cut -d '=' -f 2",
                         returnStdout: true
                     )
                     version = version.replace("\n","")
