@@ -41,7 +41,7 @@ pipeline {
         stage("Build StandAlone") {
              steps {
                  withEnv(['REMAKEN_RULES_ROOT=/home/jenkins/.remaken/rules/']) {
-                     sh "qmake StandAlone/StandAloneSolARTriangulationSample.pro"
+                     sh "qmake StandAlone/SolARTriangulationSample.pro"
                      sh "make"
                      sh "make install"
                  }
