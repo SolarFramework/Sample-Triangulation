@@ -71,7 +71,8 @@ win32 {
 message($${QMAKE_CXXFLAGS})
 
 DISTFILES += \
-    conf_Triangulation.xml
+    conf_Triangulation.xml \
+    packagedependencies.txt
 
 config_files.path = $${TARGETDEPLOYDIR}
 config_files.files=$$files($${PWD}/conf_Triangulation.xml)\
