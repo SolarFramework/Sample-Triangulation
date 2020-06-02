@@ -21,8 +21,6 @@
 
 #include <boost/log/core.hpp>
 
-#include "SolARModuleOpencv_traits.h"
-
 // ADD COMPONENTS HEADERS HERE
 #include "xpcf/xpcf.h"
 #include "core/Log.h"
@@ -43,7 +41,6 @@
 using namespace SolAR;
 using namespace SolAR::datastructure;
 using namespace SolAR::api;
-using namespace SolAR::MODULES::OPENCV;
 
 namespace xpcf = org::bcom::xpcf;
 
@@ -72,17 +69,12 @@ int main(int argc, char **argv){
     auto camera = xpcfComponentManager->resolve<input::devices::ICamera>();
     LOG_INFO("Camera loaded");
 
-/*
- * RESOLVE ??
- *
- */
-    auto imageLoader1 = xpcfComponentManager->create<SolARImageLoaderOpencv>("image1")->bindTo<image::IImageLoader>();
+    auto imageLoader1 = xpcfComponentManager->resolve<image::IImageLoader>();
+    imageLoader1->bindTo<xpcf::IConfigurable>()->configure("conf_Triangulation.xml", "image1");
     LOG_INFO("Image 1 loaded");
-    auto imageLoader2 = xpcfComponentManager->create<SolARImageLoaderOpencv>("image2")->bindTo<image::IImageLoader>();
+    auto imageLoader2 = xpcfComponentManager->resolve<image::IImageLoader>();
+    imageLoader2->bindTo<xpcf::IConfigurable>()->configure("conf_Triangulation.xml", "image2");
     LOG_INFO("Image 2 loaded");
-  ///////////////////////////////////
-  ///////////////////////////////////
-
 
     LOG_INFO("free keypoint detector");
     auto keypointsDetector =xpcfComponentManager->resolve<features::IKeypointDetector>();
@@ -107,7 +99,7 @@ int main(int argc, char **argv){
     SRef<DescriptorBuffer>                       descriptors1;
     SRef<DescriptorBuffer>                       descriptors2;
     std::vector<DescriptorMatch>                 matches;
-    std::vector<CloudPoint>                      cloud, filteredCloud;
+    std::vector<SRef<CloudPoint>>                cloud, filteredCloud;
 
     SRef<Image>                                  matchesImage;
 
