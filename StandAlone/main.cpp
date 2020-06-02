@@ -107,8 +107,8 @@ int main(int argc, char **argv){
     Transform3Df                                 poseFrame2;
 
     // initialize components requiring the camera intrinsic parameters (please refeer to the use of intrinsic parameters file)
-    poseFinderFrom2D2D->setCameraParameters(camera->getIntrinsicsParameters(), camera->getDistorsionParameters());
-    triangulator->setCameraParameters(camera->getIntrinsicsParameters(), camera->getDistorsionParameters());
+    poseFinderFrom2D2D->setCameraParameters(camera->getIntrinsicsParameters(), camera->getDistortionParameters());
+    triangulator->setCameraParameters(camera->getIntrinsicsParameters(), camera->getDistortionParameters());
     LOG_INFO("SetCameraParameters OK - Images OK");
 
     // Get first image
