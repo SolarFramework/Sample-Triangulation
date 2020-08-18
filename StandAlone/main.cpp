@@ -69,11 +69,9 @@ int main(int argc, char **argv){
     auto camera = xpcfComponentManager->resolve<input::devices::ICamera>();
     LOG_INFO("Camera loaded");
 
-    auto imageLoader1 = xpcfComponentManager->resolve<image::IImageLoader>();
-    imageLoader1->bindTo<xpcf::IConfigurable>()->configure("conf_Triangulation.xml", "image1");
+    auto imageLoader1 = xpcfComponentManager->resolve<image::IImageLoader>("image1");
     LOG_INFO("Image 1 loaded");
-    auto imageLoader2 = xpcfComponentManager->resolve<image::IImageLoader>();
-    imageLoader2->bindTo<xpcf::IConfigurable>()->configure("conf_Triangulation.xml", "image2");
+    auto imageLoader2 = xpcfComponentManager->resolve<image::IImageLoader>("image2");
     LOG_INFO("Image 2 loaded");
 
     LOG_INFO("free keypoint detector");
