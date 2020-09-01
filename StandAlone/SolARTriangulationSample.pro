@@ -70,10 +70,6 @@ win32 {
 
 message($${QMAKE_CXXFLAGS})
 
-DISTFILES += \
-    conf_Triangulation.xml \
-    packagedependencies.txt
-
 config_files.path = $${TARGETDEPLOYDIR}
 config_files.files=$$files($${PWD}/conf_Triangulation.xml)\
                      $$files($${PWD}/Image1.png)\
@@ -83,6 +79,10 @@ config_files.files=$$files($${PWD}/conf_Triangulation.xml)\
 INSTALLS += config_files
 
 config_files.path = $${TARGETDEPLOYDIR}
+
+OTHER_FILES += \
+    packagedependencies.txt
+
 
 #NOTE : Must be placed at the end of the .pro
 include ($$shell_quote($$shell_path($${QMAKE_REMAKEN_RULES_ROOT}/remaken_install_target.pri)))) # Shell_quote & shell_path required for visual on windows
