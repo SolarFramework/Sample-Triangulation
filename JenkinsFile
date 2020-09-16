@@ -1,83 +1,10 @@
-pipeline {
-    agent {
-        label "jenkins-slave-argo-qmake"
-    }
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '10'))
-    }
-    parameters {
-        booleanParam(name: 'RELEASE',
-            defaultValue: false,
-            description: 'Create a Release')
-    }
-    triggers { pollSCM('* * * * *') }    
-    stages {
+node("master") {
 
-        stage("Get Binaries") {
-            when {
-                expression { params.RELEASE == false }
-            }            
-            steps {
-                script {
-                    BRANCH = BRANCH_NAME.replace('/','_')
-                }
-                withCredentials([usernamePassword(credentialsId: 'bc6e150e-ede8-4e35-8af4-0f037edee8ac', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                    getBinaries(BRANCH,USERNAME,PASSWORD)
-                }
-            }
-        }
-     
-        stage("Get Third Parties Release") {
-             when {
-                expression { params.RELEASE == true }
-             }               
-             steps {
-                dir("StandAlone") {
-                    getThirdParties('1.0.0')
-                }
-             }
-        }
-
-        stage("Build StandAlone") {
-             steps {
-                 withEnv(['REMAKEN_RULES_ROOT=/home/jenkins/.remaken/rules/']) {
-                     sh "qmake StandAlone/SolARTriangulationSample.pro"
-                     sh "make"
-                     sh "make install"
-                 }
-             }
-        }
-
-        stage("Build Debug StandAlone") {
-            when {
-                expression { params.RELEASE == true }
-            }            
-             steps {
-                 withEnv(['REMAKEN_RULES_ROOT=/home/jenkins/.remaken/rules/']) {
-                     sh "qmake StandAlone/SolARTriangulationSample.pro CONFIG+=debug"
-                     sh "make"
-                     sh "make install"
-                 }
-             }
-        }        
-
-        stage("Release") {
-            when {
-                expression { params.RELEASE == true }
-            }
-            steps {
-                script {
-                    version = sh (
-                        script: "cat StandAlone/*.pro  | grep VERSION | head -1 | cut -d '=' -f 2",
-                        returnStdout: true
-                    )
-                    version = version.replace("\n","")
-                }                
-                prepareRelease("SolARBuild","linux-gcc","Sample-Triangulation")                
-                withCredentials([string(credentialsId: 'github-token', variable: 'token')]) {
-                    release("Sample-Triangulation","v${version}"," ",token);
-                }
-            }   
-        }
+SolArModulePipeline {
+    moduleName="Sample-Triangulation"
+    dirName="SolARBuild"
+    buildDir="StandAlone"
+    android=false
 }
+
 }
