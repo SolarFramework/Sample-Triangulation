@@ -1,23 +1,30 @@
-SolAR Triangulation
-=============
+# SolAR Sample Triangulation
 
-SolAR is an open-source framework released under Apache license 2.0 making possible to easily create your own camera pose estimation solution to develop Augmented Reality applications. 
-SolAR is dedicated to Augmented Reality (AR).
-It offers a C++ SDK to easily and quickly develop and use custom solutions for camera pose estimation. It provides developers with a full chain from low-level vision components development to camera pose estimation pipelines and AR service development.
+[![License](https://img.shields.io/github/license/SolARFramework/Sample-triangulation?style=flat-square&label=License)](https://www.apache.org/licenses/LICENSE-2.0)
 
-The SolAR Triangulation sample shows a SolAR pipeline that sparsely reconstruct a 3D scene given to viewpoints.
+The SolAR **Triangulation sample** shows a SolAR pipeline that sparsely reconstructs a 3D scene given to viewpoints.
+
+
+| ![](./StandAlone/matching.jpg) | ![](./StandAlone/cloudpoint.jpg) |
+|:-:|:-:|
+| Matching | Cloudpoint | 
+
+
+## How to run
+
+* If you want to change the calibration parameters of the camera, edit the [camera_calibration.yml](./Mono/camera_calibration.yml).
+
+* To change properties of the components of the Triangulation pipeline, edit the [conf_Triangulation.xml](./Mono/conf_Triangulation.xml) file.
+
+
+### StandAlone
 
 To run it, launch the SolARTriangulationSample.exe. You ill visualize the 3D point cloud built from two viewpoints.
 
-Press escape to quit the application.
+* Press `escape` to quit the application.
 
-If you want to change the calibration parameters of the camera, edit the camera_calibration.yml.
+## Contact 
+Website https://solarframework.github.io/
 
-To change properties of the components of the triangulation pipeline, edit the .xml file.
-
-
-*   Website https://solarframework.github.io/
-
-*   Contact framework.solar@b-com.com
-
+Contact framework.solar@b-com.com
 
