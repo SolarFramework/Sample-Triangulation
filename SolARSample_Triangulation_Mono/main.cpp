@@ -56,9 +56,9 @@ int main(int argc, char **argv){
         /* this is needed in dynamic mode */
         SRef<xpcf::IComponentManager> xpcfComponentManager = xpcf::getComponentManagerInstance();
 
-        if(xpcfComponentManager->load("conf_Triangulation.xml")!=org::bcom::xpcf::_SUCCESS)
+        if(xpcfComponentManager->load("SolARSample_Triangulation_Mono_conf.xml")!=org::bcom::xpcf::_SUCCESS)
         {
-            LOG_ERROR("Failed to load the configuration file conf_Triangulation.xml")
+            LOG_ERROR("Failed to load the configuration file SolARSample_Triangulation_Mono_conf.xml")
             return -1;
         }
 
