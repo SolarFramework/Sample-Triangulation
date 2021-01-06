@@ -3,8 +3,8 @@ QT       -= core gui
 CONFIG -= qt
 
 ## global defintions : target lib name, version
-TARGET = SolARTriangulationSample
-VERSION=0.9.0
+TARGET = SolARSample_Triangulation_Mono
+VERSION=0.8.2
 
 DEFINES += MYVERSION=$${VERSION}
 CONFIG += c++1z
@@ -71,7 +71,7 @@ win32 {
 message($${QMAKE_CXXFLAGS})
 
 config_files.path = $${TARGETDEPLOYDIR}
-config_files.files=$$files($${PWD}/conf_Triangulation.xml)\
+config_files.files=$$files($${PWD}/SolARSample_Triangulation_Mono_conf.xml)\
                      $$files($${PWD}/Image1.png)\
                      $$files($${PWD}/Image2.png)\
                      $$files($${PWD}/camera_calibration.yml)
