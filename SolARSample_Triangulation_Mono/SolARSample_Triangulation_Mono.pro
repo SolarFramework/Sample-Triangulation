@@ -4,7 +4,7 @@ CONFIG -= qt
 
 ## global defintions : target lib name, version
 TARGET = SolARSample_Triangulation_Mono
-VERSION=0.8.2
+VERSION=0.9.1
 
 DEFINES += MYVERSION=$${VERSION}
 CONFIG += c++1z
