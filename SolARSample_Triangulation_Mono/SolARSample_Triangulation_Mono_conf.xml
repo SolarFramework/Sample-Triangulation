@@ -101,7 +101,7 @@
             <property name="maxMatches" type="uint" value="-1"/>
 		</configure>	
 		<configure component="SolARImageViewerOpencv">
-			<property name="title" type="string" value=""/>
+                        <property name="title" type="string" value="Matches"/>
             <property name="exitKey" type="int" value="27"/>
             <property name="width" type="int" value="1280"/>
             <property name="height" type="int" value="480"/>

@@ -98,4 +98,6 @@ build*
 */*/*/*-packagedependencies-win.txt
 */*/*/*.pc
 */*/*/*.sln
+bin/*.zip
+run.sh
 >>>>>>> feature/SlamExtended
