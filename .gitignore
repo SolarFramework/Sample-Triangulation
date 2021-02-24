@@ -69,7 +69,6 @@ x64*
 *vcxproj.*
 x64/
 .vs/
-*.bat
 *remakeninfo.txt
 Debug/
 Release/
@@ -98,4 +97,6 @@ build*
 */*/*/*-packagedependencies-win.txt
 */*/*/*.pc
 */*/*/*.sln
+bin/*.zip
+run.sh
 >>>>>>> feature/SlamExtended
