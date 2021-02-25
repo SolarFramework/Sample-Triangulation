@@ -76,6 +76,18 @@ config_files.files=$$files($${PWD}/SolARSample_Triangulation_Mono_conf.xml)\
 
 INSTALLS += config_files
 
+linux {
+  run_install.path = $${TARGETDEPLOYDIR}
+  run_install.files = $${PWD}/../run.sh
+  CONFIG(release,debug|release) {
+    run_install.extra = cp $$files($${PWD}/../runRelease.sh) $${PWD}/../run.sh
+  }
+  CONFIG(debug,debug|release) {
+    run_install.extra = cp $$files($${PWD}/../runDebug.sh) $${PWD}/../run.sh
+  }
+  INSTALLS += run_install
+}
+
 config_files.path = $${TARGETDEPLOYDIR}
 
 OTHER_FILES += \

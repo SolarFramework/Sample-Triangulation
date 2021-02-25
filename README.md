@@ -19,7 +19,17 @@ The SolAR **Triangulation sample** shows a SolAR pipeline that sparsely reconstr
 
 ### StandAlone
 
-To run it, launch the SolARTriangulationSample.exe. You ill visualize the 3D point cloud built from two viewpoints.
+To run it, launch:
+
+> #### Windows
+>
+	SolARTriangulationSample.exe
+
+> #### Linux
+>
+	./run.sh ./SolARTriangulationSample
+
+You will visualize the 3D point cloud built from two viewpoints.
 
 * Press `escape` to quit the application.
 
