@@ -1,10 +1,12 @@
 node("master") {
 
 SolArModulePipeline {
-    moduleName="Sample-Triangulation"
-    dirName="SolARBuild"
+    moduleName="SolARSample_Triangulation"
+    dirName="SolARSample_Triangulation_Mono"
     buildDir="StandAlone"
+    makeTarget="install install_deps"
     android=false
+    packageScripts="bundleSamples"
 }
 
 }
