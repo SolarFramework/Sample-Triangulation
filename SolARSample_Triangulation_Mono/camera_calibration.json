@@ -1,0 +1,19 @@
+{
+    "CameraParameters": {
+        "name": "Camera",
+        "id": 0,
+        "type": 0,
+        "resolution": {
+            "width": 3072,
+            "height": 2048
+        },
+        "intrinsic": [
+            2759.48, 0, 1520.69, 0,
+			2764.16, 1006.81, 
+            0, 0, 1
+        ],
+        "distortion": [
+            0.0, 0.0, 0.0, 0.0, 0.0
+        ]
+    }
+}

@@ -72,7 +72,7 @@ config_files.path = $${TARGETDEPLOYDIR}
 config_files.files=$$files($${PWD}/SolARSample_Triangulation_Mono_conf.xml)\
                      $$files($${PWD}/Image1.png)\
                      $$files($${PWD}/Image2.png)\
-                     $$files($${PWD}/camera_calibration.yml)
+                     $$files($${PWD}/camera_calibration.json)
 
 INSTALLS += config_files
 
