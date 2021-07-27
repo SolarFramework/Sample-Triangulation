@@ -5,16 +5,16 @@
 The SolAR **Triangulation sample** shows a SolAR pipeline that sparsely reconstructs a 3D scene given to viewpoints.
 
 
-| ![](./StandAlone/matching.jpg) | ![](./StandAlone/cloudpoint.jpg) |
+| ![](./SolARSample_Triangulation_Mono/matching.jpg) | ![](./SolARSample_Triangulation_Mono/cloudpoint.jpg) |
 |:-:|:-:|
 | Matching | Cloudpoint | 
 
 
 ## How to run
 
-* If you want to change the calibration parameters of the camera, edit the [camera_calibration.yml](./Mono/camera_calibration.yml).
+* If you want to change the calibration parameters of the camera, edit the [camera_calibration.json](./SolARSample_Triangulation_Mono/camera_calibration.json).
 
-* To change properties of the components of the Triangulation pipeline, edit the [conf_Triangulation.xml](./Mono/conf_Triangulation.xml) file.
+* To change properties of the components of the Triangulation pipeline, edit the [SolARSample_Triangulation_Mono_conf.xml](./SolARSample_Triangulation_Mono/SolARSample_Triangulation_Mono_conf.xml) file.
 
 
 ### StandAlone
