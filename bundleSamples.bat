@@ -3,7 +3,7 @@ SETLOCAL EnableDelayedExpansion
 
 SET version=0.10.0
 
-SET filename=SolAR_Fiducial_%version%
+SET filename=SolAR_Triangulation_%version%
 SET arg1=%1
 
 IF NOT "!arg1!"=="" (SET filename=%arg1%)
