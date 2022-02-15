@@ -29,14 +29,15 @@ CONFIG(release,debug|release) {
 win32:CONFIG -= static
 win32:CONFIG += shared
 
-DEPENDENCIESCONFIG = sharedlib recursive install_recurse
+DEPENDENCIESCONFIG = sharedlib install_recurse
 PROJECTCONFIG = QTVS
 
 #NOTE : CONFIG as staticlib or sharedlib, DEPENDENCIESCONFIG as staticlib or sharedlib, QMAKE_TARGET.arch and PROJECTDEPLOYDIR MUST BE DEFINED BEFORE templatelibconfig.pri inclusion
 include ($$shell_quote($$shell_path($${QMAKE_REMAKEN_RULES_ROOT}/templateappconfig.pri)))  # Shell_quote & shell_path required for visual on windows
 
-DEFINES += BOOST_ALL_NO_LIB
 DEFINES += BOOST_ALL_DYN_LINK
+DEFINES += BOOST_AUTO_LINK_NOMANGLE
+DEFINES += BOOST_LOG_DYN_LINK
 
 HEADERS += \
 
@@ -46,6 +47,9 @@ SOURCES += \
 unix {
     LIBS += -ldl
     QMAKE_CXXFLAGS += -DBOOST_LOG_DYN_LINK
+
+    # Avoids adding install steps manually. To be commented to have a better control over them.
+    QMAKE_POST_LINK += "make install install_deps"
 }
 
 macx {
@@ -61,22 +65,23 @@ win32 {
     QMAKE_LFLAGS += /MACHINE:X64
     DEFINES += WIN64 UNICODE _UNICODE
     QMAKE_COMPILER_DEFINES += _WIN64
+
+    # Windows Kit (msvc2013 64)
+    LIBS += -L$$(WINDOWSSDKDIR)lib/winv6.3/um/x64 -lshell32 -lgdi32 -lComdlg32
+    INCLUDEPATH += $$(WINDOWSSDKDIR)lib/winv6.3/um/x64
 }
 
 android {
     ANDROID_ABIS="arm64-v8a"
 }
 
-
-message($${QMAKE_CXXFLAGS})
-
-config_files.path = $${TARGETDEPLOYDIR}
-config_files.files=$$files($${PWD}/SolARSample_Triangulation_Mono_conf.xml)\
-                     $$files($${PWD}/Image1.png)\
-                     $$files($${PWD}/Image2.png)\
+configfile.path = $${TARGETDEPLOYDIR}/
+configfile.files=$$files($${PWD}/SolARSample_Triangulation_Mono_conf.xml) \
+                     $$files($${PWD}/Image1.png) \
+                     $$files($${PWD}/Image2.png) \
                      $$files($${PWD}/camera_calibration.json)
 
-INSTALLS += config_files
+INSTALLS += configfile
 
 linux {
   run_install.path = $${TARGETDEPLOYDIR}
@@ -87,12 +92,12 @@ linux {
   CONFIG(debug,debug|release) {
     run_install.extra = cp $$files($${PWD}/../runDebug.sh) $${PWD}/../run.sh
   }
+  run_install.CONFIG += nostrip
   INSTALLS += run_install
 }
 
-config_files.path = $${TARGETDEPLOYDIR}
 
-OTHER_FILES += \
+DISTFILES += \
     packagedependencies.txt
 
 
